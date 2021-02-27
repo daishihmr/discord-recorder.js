@@ -1,0 +1,21 @@
+{
+  "name": "private_rec",
+  "version": "1.0.0",
+  "description": "",
+  "main": "rec.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/opus": "^0.4.0",
+    "create-silent-audio": "^0.1.1",
+    "discord.js": "^12.5.1",
+    "ffmpeg-static": "^4.2.7",
+    "moment": "^2.29.1",
+    "opusscript": "0.0.8",
+    "tonegenerator": "^0.3.2",
+    "waveheader": "0.0.2"
+  }
+}
