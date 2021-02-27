@@ -12,15 +12,14 @@ class Silence extends Readable {
 const client = new Discord.Client();
 const config = require('./auth.json');
 
-const now = moment().format('yyyy-MM-DD-HH-mm-ss');
-const folderName = `./recordings/${now}`;
-
 client.on('message', (msg) => {
   if (msg.content.startsWith(config.prefix + 'j')) {
-    const startTime = Date.now();
-
+    const now = moment().format('yyyy-MM-DD-HH-mm-ss');
+    const folderName = `./recordings/${now}`;
     fs.mkdirSync(folderName);
     fs.mkdirSync(`${folderName}/temp`);
+
+    const startTime = Date.now();
 
     const channels = [];
     const members = [];
