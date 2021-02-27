@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const { Readable } = require('stream');
 const moment = require('moment');
-const joinPcmFiles = require('./joinPcmFiles');
 
 class Silence extends Readable {
   _read() {
