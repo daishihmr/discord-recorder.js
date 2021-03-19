@@ -24,7 +24,7 @@ client.on('message', (msg) => {
     const channels = [];
     const members = [];
 
-    const generateOutputFile = (channel, member) => {
+    const generateOutputFile = (channel, member, time) => {
       if (channels.indexOf(channel.id) < 0) {
         channels.push(channel.id);
       }
@@ -34,7 +34,7 @@ client.on('message', (msg) => {
 
       const channelId = channels.indexOf(channel.id);
       const memberId = members.indexOf(member.id);
-      const timestamp = Date.now() - startTime;
+      const timestamp = time - startTime;
       const fileName = `./${folderName}/temp/${channelId}-${memberId}-${timestamp}.pcm`;
 
       const stream = fs.createWriteStream(fileName);
@@ -69,6 +69,7 @@ client.on('message', (msg) => {
 
         conn.on('speaking', (user, speaking) => {
           if (speaking) {
+            const time = Date.now();
             // msg.channel.send(`I'm listening to ${user}`);
             // this creates a 16-bit signed PCM, stereo 48KHz PCM stream.
             const audioStream = receiver.createStream(user, {
@@ -77,15 +78,15 @@ client.on('message', (msg) => {
             });
             const data = speaking.toArray();
             if (data.length > 0) {
-              console.log('speaking begin ');
-              const outputStream = generateOutputFile(voiceChannel, user);
+              // console.log('speaking begin ');
+              const outputStream = generateOutputFile(voiceChannel, user, time);
               audioStream.pipe(outputStream);
               audioStream.on('finish', () => {
-                console.log('audioStream finish');
+                // console.log('audioStream finish');
                 outputStream.end();
               });
             } else {
-              console.log('speaking end');
+              // console.log('speaking end');
             }
           }
         });

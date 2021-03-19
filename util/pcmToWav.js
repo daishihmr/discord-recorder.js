@@ -17,9 +17,10 @@ const wav = (folderName) => {
       bitDepth: 16,
     }));
 
+    console.log(`${folderName}/${pcmFile}`);
     const pcmData = fs.readFileSync(`${folderName}/${pcmFile}`);
-    outputStream.write(pcmData);
-    outputStream.end();
+    console.log(pcmData.length);
+    outputStream.end(pcmData);
   });
 };
 
