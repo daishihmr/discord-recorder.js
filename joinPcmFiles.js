@@ -58,7 +58,7 @@ const joinPcmFiles = (folderName) => {
   let time = 0;
 
   pcmFiles.forEach((pcmFile) => {
-    // console.log('proc ' + pcmFile);
+    console.log('proc ' + pcmFile);
 
     const fnb = pcmFile.split('.')[0];
     const channelId = fnb.split('-')[0];
@@ -69,12 +69,14 @@ const joinPcmFiles = (folderName) => {
     if (currentChannelId != channelId || currentMemberId != memberId) {
       if (outputStream != null) {
         outputStream.end();
+        console.log(`./${folderName}/${currentChannelId}-${currentMemberId}.pcm` + ' end');
       }
       currentChannelId = channelId;
       currentMemberId = memberId;
       outputStream = fs.createWriteStream(
         `./${folderName}/${currentChannelId}-${currentMemberId}.pcm`
       );
+      console.log(`./${folderName}/${currentChannelId}-${currentMemberId}.pcm` + ' start');
     }
 
     writeSlence(outputStream, timestamp - time);

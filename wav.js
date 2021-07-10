@@ -7,6 +7,7 @@ const wav = (folderName) => {
     .filter((_) => _.endsWith('.pcm'));
   
   pcmFiles.forEach((pcmFile) => {
+    console.log(`${pcmFile} start`)
     const b = pcmFile.split(".")[0];
     const outputStream = fs.createWriteStream(`${folderName}/${b}.wav`);
     const stat = fs.statSync(`${folderName}/${pcmFile}`);
@@ -20,6 +21,7 @@ const wav = (folderName) => {
     const pcmData = fs.readFileSync(`${folderName}/${pcmFile}`);
     outputStream.write(pcmData);
     outputStream.end();
+    console.log(`${pcmFile} end`)
   });
 };
 
